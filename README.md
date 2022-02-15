@@ -12,7 +12,7 @@ CS1951 assignment, ACM Class, SJTU
 
 因此，如果对内容有任何疑问，可以参考STL，或是在这里提出issue，谢谢！
 
-最后，我们会检查内存泄漏，如果还不会测内存泄漏，可以看教程[如何检测内存泄漏？](./tutorials/detect-memory-leak/detect-memory-leak.md)
+最后，我们会检查内存泄漏，如果还不会测内存泄漏，可以看教程[如何检测内存泄漏？](https://github.com/IvyCharon/STLite_ACM/tree/main/tutorials/detect-memory-leak/detect-memory-leak.md)
 
 
 ## 评测方法
