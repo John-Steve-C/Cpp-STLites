@@ -6,13 +6,15 @@
 #include <climits>
 #include <cstddef>
 
-namespace sjtu {
+namespace sjtu 
+{
 /**
  * a data container like std::vector
  * store data in a successive memory and support random access.
  */
 template<typename T>
-class vector {
+class vector 
+{
 public:
 	/**
 	 * TODO
@@ -23,7 +25,26 @@ public:
 	 * you can see RandomAccessIterator at CppReference for help.
 	 */
 	class const_iterator;
-	class iterator {
+	class iterator 
+	{
+	// The following code is written for the C++ type_traits library.
+	// Type traits is a C++ feature for describing certain properties of a type.
+	// For instance, for an iterator, iterator::value_type is the type that the 
+	// iterator points to. 
+	// STL algorithms and containers may use these type_traits (e.g. the following 
+	// typedef) to work properly. In particular, without the following code, 
+	// @code{std::sort(iter, iter1);} would not compile.
+	// See these websites for more information:
+	// https://en.cppreference.com/w/cpp/header/type_traits
+	// About value_type: https://blog.csdn.net/u014299153/article/details/72419713
+	// About iterator_category: https://en.cppreference.com/w/cpp/iterator
+	public:
+		using difference_type = std::ptrdiff_t;
+		using value_type = T;
+		using pointer = T*;
+		using reference = T&;
+		using iterator_category = std::output_iterator_tag;
+
 	private:
 		/**
 		 * TODO add data members
@@ -34,21 +55,26 @@ public:
 		 * return a new iterator which pointer n-next elements
 		 * as well as operator-
 		 */
-		iterator operator+(const int &n) const {
+		iterator operator+(const int &n) const 
+		{
 			//TODO
 		}
-		iterator operator-(const int &n) const {
+		iterator operator-(const int &n) const 
+		{
 			//TODO
 		}
 		// return the distance between two iterators,
 		// if these two iterators point to different vectors, throw invaild_iterator.
-		int operator-(const iterator &rhs) const {
+		int operator-(const iterator &rhs) const 
+		{
 			//TODO
 		}
-		iterator& operator+=(const int &n) {
+		iterator& operator+=(const int &n) 
+		{
 			//TODO
 		}
-		iterator& operator-=(const int &n) {
+		iterator& operator-=(const int &n) 
+		{
 			//TODO
 		}
 		/**
@@ -86,7 +112,8 @@ public:
 	 * TODO
 	 * has same function as iterator, just for a const object.
 	 */
-	class const_iterator {
+	class const_iterator 
+	{
 
 	};
 	/**
