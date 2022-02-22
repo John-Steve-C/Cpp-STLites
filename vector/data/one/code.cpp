@@ -33,7 +33,7 @@ void TestConstructor()
 
 void TestIterators()
 {
-	std::cout << "Testing iterators..." << std::endl; 
+	std::cout << "Testing iterators..." << std::endl;
 	sjtu::vector<int> v;
 	for (int i = 1; i <= 20; ++i) {
 		v.push_back(i);
@@ -43,6 +43,8 @@ void TestIterators()
 	}
 	std::cout << std::endl;
 	const sjtu::vector<int> vc(v);
+
+//    std::cout << *(v.begin()) <<' '<< *(v.cbegin());
 	for (sjtu::vector<int>::const_iterator it = vc.cbegin(); it != vc.cend(); ++it) {
 		std::cout << *it << " ";
 	}
