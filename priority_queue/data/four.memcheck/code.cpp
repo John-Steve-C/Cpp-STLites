@@ -205,7 +205,7 @@ void Testextra(){
 	std :: cout << std :: endl;
 }
 int main(){
-	TestConstructorAndPush(); 
+	TestConstructorAndPush();
  	TestSize();
  	TestException();
 	Testguest();
