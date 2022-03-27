@@ -38,6 +38,8 @@
 
 ## 调试：
 
+因为需要支持队列合并操作，所以我写的是 [斜堆](https://www.jianshu.com/p/66b900920407)
+
 2022.3.10晚，拼命浪费时间，在10点才开始
 
 1. 链表的复制构造，不能直接头指针赋值，还是要重新开一块空间，把之前的每个值一一存进来。否则会在clear后访问非法内存。
@@ -85,3 +87,10 @@
     把rand()改成其他数，就Segmentation fault。。。merge到一半会被断开？此时other.root和root.left位置是重合的？所以会导致`double free`。
 
     所以merge完不需要马上写`clear(other.node)`，应该等到结束时令其自动析构。（实际上*this和other.root有公用的节点）。写成`other.root = nullptr`即可。
+
+---
+
+## Code Review
+
+- 用斜堆实现，对深度没有限制，但是均摊后，`merge` 操作的时间复杂度是 $\log n$
+- 不用记录空路径长度，但是要在 `merge_node` 时，交换路径上每一个节点的左右孩子

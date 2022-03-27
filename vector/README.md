@@ -52,3 +52,13 @@ OJ测试部分占比：80%，code review部分占比：20%
   `delete`会调用指向的类的析构函数,但是`free`不会
 - 参考资料：[placement_new](https://blog.csdn.net/linuxheik/article/details/80449059) 。[malloc/free](https://www.cnblogs.com/limera/p/new_malloc.html)
 - 哪个位置要删除？开头和末尾是0~cur_len-1，注意！不要犯低级错误。
+
+---
+## code review (2022.3.13)
+
+1. 可以再增加一个`half_space`（空间减半）的操作，当`4 * cur_len < max_size`时调用，删除多余空间
+2. `const_iterator`只能遍历`const vector`
+3. 为什么数组的初始长度为10？
+4. `double_space`操作后，原本的`iterator`会失效。因为实际上是复制到新的位置，`iterator` 指的位置不是原本的位置。
+5. `malloc`和`new`的区别
+6. 迭代器中的 `id` 是为了实现两 `iterator` 相减的操作
