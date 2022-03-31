@@ -231,6 +231,7 @@ void test_iterator()
 	}
 }
 int main(){
+//    freopen("test.txt", "w", stdout);
 	test_insert();
 	test_erase();
 	test_const_at();

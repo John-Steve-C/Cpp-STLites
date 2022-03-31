@@ -80,7 +80,9 @@ void tester(void) {
 }
 
 int main(void) {
-	std::ios::sync_with_stdio(false);
+    freopen("test.txt", "w", stdout);
+
+    std::ios::sync_with_stdio(false);
 	std::cin.tie(0);
 	std::cout.tie(0);
 	tester();

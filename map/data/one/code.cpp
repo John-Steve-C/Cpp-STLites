@@ -56,6 +56,7 @@ void tester(void) {
 			assert(result.second);
 		}
 	}
+//    std::cout << map.size() << std::endl;//100000个
 	//	test: count(), find(), erase()
 	for (int i = 0; i < 100000; ++i) {
 		if (i > 1896 && i <= 2016) {
@@ -63,8 +64,10 @@ void tester(void) {
 		}
 		assert(map.count(Integer(i)) == 1);
 		assert(map.find(Integer(i)) != map.end());
-		map.erase(map.find(Integer(i)));
+//        std::cout << "i = " << i << std::endl;
+        map.erase(map.find(Integer(i)));
 	}
+//    std::cout << 44  << std::endl;
 	//	test: constructor, operator=, clear();
 	for (int i = 0; i < (int)map.size(); ++i) {
 		sjtu::map<Integer, std::string, Compare> copy(map);
