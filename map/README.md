@@ -123,20 +123,24 @@ bonus可以是对容器某个行为的优化，type_traits相关应用（学习�
 
 1. discards qualifiers，表示有修改 `const` 变量的操作
   
-  问题在于，map的复制构造函数，要用列表来实现；而且 `front` 和 `back` 应当声明为 `const`
+    问题在于，map的复制构造函数，要用列表来实现；而且 `front` 和 `back` 应当声明为 `const`
+
 2. `utility.hpp` 中没有 `make_pair` 函数
 3. call of overloaded ‘RedBlackTree()’ is ambiguous
 
-  红黑树类中，定义了一个只有一个缺省参数的构造函数，会与默认构造函数混淆
+    红黑树类中，定义了一个只有一个缺省参数的构造函数，会与默认构造函数混淆
+
 4. `Segmentation fault` -> 红黑树的默认构造函数，root应该设置为空指针，然后在 find 时做特判
 
-  也就是要避免对空指针进行解引用
+    也就是要避免对空指针进行解引用
+
 5. 现在是会访问到空指针，还是 `remove` 的问题，但是我已经和周老师的代码手动对比了，感觉没问题？
 6. `LR`，`remove_adjust` 中有好多细节写错了
 7. `remove` 中的 `left/right` 写反了...
 8. 原本以为析构函数写错了，最后在周老师的帮助下，发现是`remove` 中的一个赋值写成了 `==`
 
-  还是要多学一点调试技巧！除了输出信息，还可以手写一组小数据来测试！
+    还是要多学一点调试技巧！除了输出信息，还可以手写一组小数据来测试！
+
 9. `make_empty` 的参数 `NODE*` 必须引用传递，因为`delete` 之后会有 `t=nullptr`的操作
 10. `insert`要长度加一
 11. 后缀`++`的重载写错了，应该返回的是临时变量，然后对原变量执行 ++ 操作
@@ -145,10 +149,11 @@ bonus可以是对容器某个行为的优化，type_traits相关应用（学习�
 14. 复制构造一开始，也要让`root = nullptr`
 15. 终于发现为什么会T了，因为 `begin` 的查询花费太多时间，所以直接把最小值的指针保存下来就可以了
 
-  只有`insert`,`delete`,构造,`make_empty`等函数需要修改两个指针，还有`back`等需要加上特判空指针的情况
+    只有`insert`,`delete`,构造,`make_empty`等函数需要修改两个指针，还有`back`等需要加上特判空指针的情况
+
 16. 最后的2个重要的特判，一定要先判断 **map是否为空** ，再去判断 `head` / `end_node` 的问题  
     ```cpp
-    iterator begin() {
+	iterator begin() {
         if (mp.root == nullptr) return iterator(mp.end_node, this);//判断是否为空
         else return iterator(mp.head, this);
     }
@@ -167,3 +172,13 @@ bonus可以是对容器某个行为的优化，type_traits相关应用（学习�
                 return *this;
             }
     ```
+
+---
+
+## Code Review
+
+- 删除，举例子模拟实现（结果考我的是insert，口胡了半天发现错了.......）
+- 迭代器的平均复杂度 O(1)，按dfs遍历一棵树，然后求平均，
+  - 最坏是log，能否优化到 O(1)？用链表额外存储
+- 没写`type_traits`的优化
+- 
